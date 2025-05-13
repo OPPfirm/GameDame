@@ -2,7 +2,7 @@
 
 Un jeu de dames international (sur plateau 10x10) implémenté en Python avec Pygame, incluant un mode joueur contre joueur et une intelligence artificielle avec plusieurs niveaux de difficulté.
 
-![Jeu de Dames](![image](https://github.com/user-attachments/assets/7e3fc878-acd1-4179-8ce3-2cc8e276e69f)
+![image](https://github.com/user-attachments/assets/7e3fc878-acd1-4179-8ce3-2cc8e276e69f)
 
 ## 🎮 Fonctionnalités
 
