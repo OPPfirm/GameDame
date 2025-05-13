@@ -565,7 +565,15 @@ class GameVsAI:
             all_moves = self.get_all_possible_moves('noir')
             
             for start_pos, moves in all_moves.items():
+                # Vérification de sécurité pour start_pos
+                if not isinstance(start_pos, tuple) or len(start_pos) != 2:
+                    continue
+                    
                 for end_pos in moves.keys():
+                    # Vérification de sécurité pour end_pos
+                    if not isinstance(end_pos, tuple) or len(end_pos) != 2:
+                        continue
+                        
                     # Simuler le mouvement
                     piece = self.board.get_piece(start_pos[0], start_pos[1])
                     if piece:
@@ -598,7 +606,15 @@ class GameVsAI:
             all_moves = self.get_all_possible_moves('blanc')
             
             for start_pos, moves in all_moves.items():
+                # Vérification de sécurité pour start_pos
+                if not isinstance(start_pos, tuple) or len(start_pos) != 2:
+                    continue
+                    
                 for end_pos in moves.keys():
+                    # Vérification de sécurité pour end_pos
+                    if not isinstance(end_pos, tuple) or len(end_pos) != 2:
+                        continue
+                        
                     # Simuler le mouvement
                     piece = self.board.get_piece(start_pos[0], start_pos[1])
                     if piece:
@@ -944,9 +960,17 @@ class GameVsAI:
         # mais nous la gardons simplifiée pour compatibilité
         if isinstance(move, tuple) and len(move) == 2:
             start_pos, end_pos = move
-            piece = self.board.get_piece(start_pos[0], start_pos[1])
-            if piece:
-                self.board.move(piece, end_pos[0], end_pos[1])
+            # Vérifier si start_pos est un tuple (coordonnées) ou un entier
+            if isinstance(start_pos, tuple) and len(start_pos) == 2:
+                piece = self.board.get_piece(start_pos[0], start_pos[1])
+                if piece:
+                    self.board.move(piece, end_pos[0], end_pos[1])
+            else:
+                # Si start_pos n'est pas un tuple, c'est probablement une erreur
+                # Afficher un message de débogage et continuer
+                print(f"Warning: start_pos n'est pas un tuple: {start_pos}, type: {type(start_pos)}")
+                # Tentative de récupération - ne rien faire dans ce cas
+                return
 
     def is_game_over(self):
         # Check if the current player has any valid moves
